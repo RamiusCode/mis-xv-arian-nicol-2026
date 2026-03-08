@@ -1,0 +1,88 @@
+---
+
+---
+
+<section class="py-4 flex flex-col items-center px-8">
+  <!-- IMAGEN ESTRELLA arriba del calendario -->
+  <img
+    src="/imagenes/estre.png"
+    alt="Estrella decorativa"
+    class="w-[43vw] max-w-[180px] h-auto object-contain mb-4"
+  />
+
+  <div
+    class="bg-white/30 backdrop-blur-sm rounded-2xl border border-[#c9932a]/40 p-6 w-full max-w-xs shadow-md"
+    id="calendario-card"
+  >
+    <!-- Mes -->
+    <h3
+      class="font-charm text-2xl text-[#c9932a] font-bold text-center mb-4"
+      id="nombre-mes"
+    >
+    </h3>
+
+    <!-- Días semana -->
+    <div class="grid grid-cols-7 gap-1 mb-2">
+      {
+        ["D", "L", "M", "M", "J", "V", "S"].map((d) => (
+          <div class="text-center font-charm text-xs text-[#c9932a]/70 font-bold">
+            {d}
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Días del mes -->
+    <div class="grid grid-cols-7 gap-1" id="dias-container"></div>
+  </div>
+</section>
+
+<script>
+  const DIA_ESPECIAL = 14;
+  const MES_ESPECIAL = 3;
+  const AÑO_ESPECIAL = 2026;
+
+  const MESES = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ];
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("nombre-mes")!.textContent =
+      `${MESES[MES_ESPECIAL - 1]} ${AÑO_ESPECIAL}`;
+
+    const primerDia = new Date(AÑO_ESPECIAL, MES_ESPECIAL - 1, 1).getDay();
+    const ultimoDia = new Date(AÑO_ESPECIAL, MES_ESPECIAL, 0).getDate();
+    const container = document.getElementById("dias-container")!;
+
+    for (let i = 0; i < primerDia; i++) {
+      container.appendChild(document.createElement("div"));
+    }
+
+    for (let dia = 1; dia <= ultimoDia; dia++) {
+      const div = document.createElement("div");
+      div.className =
+        "aspect-square flex items-center justify-center rounded-lg";
+
+      if (dia === DIA_ESPECIAL) {
+        div.className += " bg-[#c9932a] shadow-md";
+        div.innerHTML = `<span class="font-charm text-base text-white font-bold">${dia}</span>`;
+      } else {
+        div.className += " hover:bg-[#c9932a]/10 transition-all";
+        div.innerHTML = `<span class="font-charm text-sm text-[#7a5c2e]">${dia}</span>`;
+      }
+
+      container.appendChild(div);
+    }
+  });
+</script>

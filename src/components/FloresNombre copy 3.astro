@@ -1,0 +1,55 @@
+---
+import ReproductorMusica from "../components/ReproductorMusica.astro";
+---
+
+<section class="relative w-full overflow-hidden [aspect-ratio:1080/1920]">
+    <!-- FONDO -->
+    <img
+        src="/imagenes/fondo9.png"
+        alt="Fondo"
+        class="absolute inset-0 w-full h-full object-cover object-center"
+    />
+
+    <!-- CONTENIDO -->
+    <div class="relative w-full h-full">
+        <!-- "Mis" — arriba izquierda -->
+        <span
+            class="font-great-vibes absolute text-[#c9932a] top-[30%] left-[10%] text-[15vw] leading-none drop-shadow-sm"
+        >
+            Mis
+        </span>
+
+        <!-- "15" — centro, grande -->
+        <span
+            class="font-great-vibes absolute text-[#c9932a] top-[32%] left-1/2 -translate-x-1/2 text-[30vw] leading-none drop-shadow-md"
+        >
+            15
+        </span>
+
+        <!-- "Años" — abajo derecha -->
+        <span
+            class="font-great-vibes absolute text-[#c9932a] top-[42%] right-[10%] text-[15vw] leading-none drop-shadow-sm"
+        >
+            Años
+        </span>
+
+        <!-- FLORES — izquierda, al lado del texto -->
+        <img
+            src="/imagenes/flores.png"
+            alt="Flores decorativas"
+            class="absolute top-[40%] left-[15%] w-[25vw] h-auto object-contain"
+        />
+
+        <!-- COMPONENTE EXTERNO — arriba del nombre -->
+        <div class="absolute top-[65%] left-1/2 -translate-x-1/2">
+            <ReproductorMusica />
+        </div>
+
+        <!-- NOMBRE — centrado horizontalmente debajo de todo -->
+        <span
+            class="font-great-vibes absolute text-[#c9932a] top-[58%] left-1/2 -translate-x-1/2 text-[20vw] leading-none drop-shadow-md whitespace-nowrap"
+        >
+            Arian Nicol
+        </span>
+    </div>
+</section>

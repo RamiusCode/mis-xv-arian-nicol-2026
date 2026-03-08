@@ -1,0 +1,105 @@
+---
+
+---
+
+<section class="py-8 flex flex-col items-center justify-center text-center">
+  <!-- Título -->
+  <h2 class="font-great-vibes text-[#c9932a] text-4xl mb-1">Faltan</h2>
+  <p class="font-crimson text-[#c9932a]/70 text-sm tracking-widest mb-6">
+    Para mi gran día
+  </p>
+
+  <!-- Números -->
+  <div class="flex items-center justify-center gap-2 md:gap-4">
+    <div class="flex flex-col items-center">
+      <span
+        id="dias"
+        class="font-charm text-3xl md:text-4xl font-bold text-[#c9932a]"
+        >00</span
+      >
+      <span
+        class="font-crimson text-[#c9932a]/70 text-[10px] uppercase tracking-widest mt-1"
+        >Días</span
+      >
+    </div>
+
+    <span class="font-charm text-[#c9932a] text-2xl mb-4">:</span>
+
+    <div class="flex flex-col items-center">
+      <span
+        id="horas"
+        class="font-charm text-3xl md:text-4xl font-bold text-[#c9932a]"
+        >00</span
+      >
+      <span
+        class="font-crimson text-[#c9932a]/70 text-[10px] uppercase tracking-widest mt-1"
+        >Horas</span
+      >
+    </div>
+
+    <span class="font-charm text-[#c9932a] text-2xl mb-4">:</span>
+
+    <div class="flex flex-col items-center">
+      <span
+        id="minutos"
+        class="font-charm text-3xl md:text-4xl font-bold text-[#c9932a]"
+        >00</span
+      >
+      <span
+        class="font-crimson text-[#c9932a]/70 text-[10px] uppercase tracking-widest mt-1"
+        >Minutos</span
+      >
+    </div>
+
+    <span class="font-charm text-[#c9932a] text-2xl mb-4">:</span>
+
+    <div class="flex flex-col items-center">
+      <span
+        id="segundos"
+        class="font-charm text-3xl md:text-4xl font-bold text-[#c9932a]"
+        >00</span
+      >
+      <span
+        class="font-crimson text-[#c9932a]/70 text-[10px] uppercase tracking-widest mt-1"
+        >Segundos</span
+      >
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const fechaEvento = new Date("2026-03-14T19:00:00").getTime();
+
+    function actualizar() {
+      const diff = fechaEvento - new Date().getTime();
+
+      const dias = diff > 0 ? Math.floor(diff / (1000 * 60 * 60 * 24)) : 0;
+      const horas =
+        diff > 0
+          ? Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+          : 0;
+      const minutos =
+        diff > 0 ? Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)) : 0;
+      const segundos = diff > 0 ? Math.floor((diff % (1000 * 60)) / 1000) : 0;
+
+      document.getElementById("dias")!.textContent = String(dias).padStart(
+        2,
+        "0",
+      );
+      document.getElementById("horas")!.textContent = String(horas).padStart(
+        2,
+        "0",
+      );
+      document.getElementById("minutos")!.textContent = String(
+        minutos,
+      ).padStart(2, "0");
+      document.getElementById("segundos")!.textContent = String(
+        segundos,
+      ).padStart(2, "0");
+    }
+
+    actualizar();
+    setInterval(actualizar, 1000);
+  });
+</script>

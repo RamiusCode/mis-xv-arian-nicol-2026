@@ -1,0 +1,86 @@
+<!-- SECCIÓN VERSÍCULO SIMPLE CON ANIMACIONES GSAP -->
+<section
+    class="w-full flex items-center justify-center py-4 px-4"
+    id="versiculo-section"
+>
+    <div class="max-w-4xl mx-auto text-center">
+        <!-- Texto del versículo -->
+        <p
+            id="texto-versiculo"
+            class="versiculo-texto font-charm text-xl md:text-5xl lg:text-6xl font-serif text-[#000000] leading-relaxed"
+        >
+            Guárdame como a la niña de tus ojos; Escóndeme bajo la sombra de tus
+            alas
+        </p>
+
+        <!-- Referencia bíblica -->
+        <p
+            id="referencia-versiculo"
+            class="versiculo-referencia font-charm text-xl md:text-xl text-[#b39d46] font-medium mt-8"
+        >
+            SALMOS 17:8
+        </p>
+    </div>
+</section>
+
+<!-- ANIMACIONES GSAP -->
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (typeof window !== "undefined") {
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("✨ Iniciando animación del versículo...");
+
+            // 🎯 ESTADO INICIAL - Todo oculto
+            gsap.set("#texto-versiculo", { opacity: 0, y: 30 });
+            gsap.set("#referencia-versiculo", { opacity: 0, y: 30 });
+
+            // 📍 SCROLLTRIGGER PARA ACTIVAR LA ANIMACIÓN
+            ScrollTrigger.create({
+                trigger: "#versiculo-section",
+                start: "top 90%",
+                end: "top 20%",
+
+                onEnter: () => {
+                    console.log("✨ Versículo aparece simultáneamente...");
+                    animarVersiculoSimultaneo();
+                },
+
+                onLeaveBack: () => {
+                    console.log("👋 Ocultando versículo...");
+                    ocultarVersiculoSimultaneo();
+                },
+            });
+
+            // 🎬 ANIMACIÓN SIMULTÁNEA - TODO AL MISMO TIEMPO
+            function animarVersiculoSimultaneo() {
+                const tl = gsap.timeline();
+
+                // TODO aparece al mismo tiempo con la misma duración
+                tl.to("#texto-versiculo, #referencia-versiculo", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power2.out",
+                });
+            }
+
+            // 🔙 ANIMACIÓN DE SALIDA SIMULTÁNEA
+            function ocultarVersiculoSimultaneo() {
+                gsap.set("#texto-versiculo", { opacity: 0, y: 30 });
+                gsap.set("#referencia-versiculo", { opacity: 0, y: 30 });
+            }
+
+            console.log("✨ Animación del versículo cargada");
+        });
+    }
+</script>
+
+<style>
+    .versiculo-texto {
+        font-family: Georgia, serif;
+    }
+</style>

@@ -1,0 +1,84 @@
+<!-- SECCIÓN VERSÍCULO SIMPLE CON ANIMACIONES GSAP -->
+<section
+    class="w-full flex items-center justify-center py-4 px-4"
+    id="versiculo-section"
+>
+    <div class="max-w-4xl mx-auto text-center">
+        <!-- Texto del versículo -->
+        <p
+            class="versiculo-texto font-charm text-xl md:text-5xl lg:text-6xl font-serif text-[#000000] leading-relaxed"
+        >
+            Guárdame como a la niña de tus ojos; Escóndeme bajo la sombra de tus
+            alas
+        </p>
+
+        <!-- Referencia bíblica -->
+        <p
+            class="versiculo-referencia font-charm text-xl md:text-xl text-[#B8860B] font-medium mt-8"
+        >
+            SALMOS 17:8
+        </p>
+    </div>
+</section>
+
+<!-- ANIMACIONES GSAP -->
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { SplitText } from "gsap/SplitText";
+
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("✨ Iniciando animación del versículo...");
+
+        // Dividir el texto en palabras
+        const texto = document.querySelector(".versiculo-texto");
+        const referencia = document.querySelector(".versiculo-referencia");
+
+        if (texto) {
+            const split = new SplitText(texto, { type: "words" });
+
+            // Animación de las palabras
+            gsap.from(split.words, {
+                opacity: 0,
+                y: 50,
+                rotationX: -90,
+                stagger: 0.1,
+                duration: 1,
+                ease: "back.out(1.5)",
+                scrollTrigger: {
+                    trigger: "#versiculo-section",
+                    start: "top 70%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+        }
+
+        // Animación de la referencia
+        if (referencia) {
+            gsap.from(referencia, {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#versiculo-section",
+                    start: "top 70%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse",
+                },
+                delay: 1,
+            });
+        }
+
+        console.log("✨ Animación del versículo cargada");
+    });
+</script>
+
+<style>
+    .versiculo-texto {
+        font-family: Georgia, serif;
+    }
+</style>
